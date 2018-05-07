@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<STYLE TYPE="text/css">
+body {font-size: 50px;word-wrap:break-all}
+.media-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+    }
+.media-container video{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+li {
+    list-style: none;
+    float: left;
+    width: 100%;
+}
+
+li img {
+    width: 100%;
+}
+</STYLE>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title th:text="${title}"></title>
+</head>
+<body>
+<table>
+	<div th:each="image,iterStat : ${images}">
+		<li class="media-container3">
+			<img th:src="${image.path}" alt=""/>
+		</li>
+	</div>
+	<div th:each="video,iterStat : ${videos}">
+		<p th:text="${video.name}"></p>
+		<div class="media-container">
+			<video width="400" height="300" controls="controls">
+			  <source th:src="${video.path}" th:type="'video/'+${video.format}"/>
+			  	您的浏览器不支持 HTML5 video 标签。
+			</video>
+		</div>
+	</div>
+	
+	<div th:each="file,iterStat : ${files}">
+		<tr>
+			<td valign="top"><img src="/icons/unknown.gif" alt=" "/></td>
+			<td><a th:href="${file.path}" th:text="${file.name}"/></td>
+			<td>&nbsp;</td>
+		</tr>
+	</div>
+	<div th:each="dir,iterStat : ${dirs}">
+		<tr>
+			<td valign="top"><img src="/icons/folder.gif" alt=" "/></td>
+			<td><a th:href="${dir.path}" th:text="${dir.name}"/></td>
+			<td>&nbsp;</td>
+		</tr>
+	</div>
+</table>
+
+</body>
+</html>
